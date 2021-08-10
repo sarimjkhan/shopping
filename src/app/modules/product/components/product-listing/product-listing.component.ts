@@ -18,6 +18,8 @@ export class ProductListingComponent implements OnInit {
   }
   products: any = []
   isLoaded = false
+  showError: Boolean = false
+  errorMessage: String = ""
 
   constructor(
     private route: ActivatedRoute,
@@ -41,9 +43,15 @@ export class ProductListingComponent implements OnInit {
   }
 
   getProductsByCategory() {
-    this.productsService.getProductsByCategory(this.category.slug, this.pagination).subscribe((res) => {
-      this.products = res
-    })
+    this.productsService.getProductsByCategory(this.category.slug, this.pagination).subscribe(
+      (res) => {
+        this.products = res
+      },
+      (err) => {
+        this.showError = true;
+        this.errorMessage = "API failed to return response";
+      }
+    )
   }
 
   goToProductDetails(product: any) {

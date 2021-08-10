@@ -1,4 +1,7 @@
 <div class="row col-md-12" *ngIf="products.length > 0">
+    <div class="alert alert-danger" role="alert" *ngIf="showError">
+        {{errorMessage}}
+    </div>
     <div class="row mb-4">Home > {{category.name}}</div>
 
     <div class="row mb-4 fw-bold fs-5">{{category.name}}</div>
