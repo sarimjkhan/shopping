@@ -22,6 +22,6 @@ export class ProductsService {
   getProductDetails(slug: String): Observable<any> {
     let baseUrl = this.baseService.getBaseUrl()
     let headers = { headers: new HttpHeaders(this.baseService.getBasicHeaders()) };
-    return this.httpClient.get(`${baseUrl}/products?includeGroupSlugds[]=${slug}`, headers)
+    return this.httpClient.get(`${baseUrl}/products?includeGroupSlugs[]=${slug}`, headers)
   }
 }
