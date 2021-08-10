@@ -1,7 +1,13 @@
 <div>
-    <ul>
+    <div class="fw-bold mb-4 fs-5">Categories</div>
+    <ul class="cat-list-item">
         <li *ngFor="let category of categories">
-            <a [routerLink]="['/category', category.name]" [state]="{ data: {id: category.id, slug: category.slug}}">{{category.name}}</a>
+            <span (click)="navigateToProducts(category)">
+                <div class="row" [ngClass]="{'selected': category.name === selectedCategory}">
+                    <div class="col-md-10">{{category.name}}</div>
+                    <div class="col-md-2" >></div>
+                </div>
+            </span>
         </li>
     </ul>
 </div>

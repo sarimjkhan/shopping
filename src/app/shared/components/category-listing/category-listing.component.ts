@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from '../../services/categories.service';
 
 @Component({
@@ -9,9 +9,12 @@ import { CategoriesService } from '../../services/categories.service';
 })
 export class CategoryListingComponent implements OnInit {
   categories: any = [] // add categries model here 
+  selectedCategory: any = 'beverages';
+
   constructor(
     private categoryService: CategoriesService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -19,5 +22,10 @@ export class CategoryListingComponent implements OnInit {
       //Add api response check here
       this.categories = res.data
     })
+  }
+
+  navigateToProducts(category: any) {
+    this.selectedCategory = category.name;
+    this.router.navigate(['category', category.name])
   }
 }

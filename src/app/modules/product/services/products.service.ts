@@ -16,7 +16,12 @@ export class ProductsService {
   getProductsByCategory(slug: String, pagination: any): Observable<any> {
     let baseUrl = this.baseService.getBaseUrl()
     let headers = { headers: new HttpHeaders(this.baseService.getBasicHeaders()) };
-
     return this.httpClient.get(`${baseUrl}/products?categorySlug=${slug}&per_page=${pagination.limit}&page=${pagination.page}`, headers)
+  }
+
+  getProductDetails(slug: String): Observable<any> {
+    let baseUrl = this.baseService.getBaseUrl()
+    let headers = { headers: new HttpHeaders(this.baseService.getBasicHeaders()) };
+    return this.httpClient.get(`${baseUrl}/products?includeGroupSlugds[]=${slug}`, headers)
   }
 }

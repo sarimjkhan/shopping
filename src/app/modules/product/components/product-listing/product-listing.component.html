@@ -1,1 +1,27 @@
-<p>product-listing works!</p>
+<div class="row col-md-12" *ngIf="products.length > 0">
+    <div class="row mb-4">Home > {{category.name}}</div>
+
+    <div class="row mb-4 fw-bold fs-5">{{category.name}}</div>
+    <div *ngFor="let product of products" class="col-md-3 card product-item" (click)="goToProductDetails(product)">
+        <img [src]="product.default.image.src" height="200px" />
+        <div class="row col-md-5 text-start"><p class="price">Rs {{product.default.price}}</p></div>
+        <div class="row col-md-3 mb-2 text-start"><p class="sale_price pl-2">{{product.default.sale_price}}</p></div>
+        <div class="row col-md-12 mb-2 text-start"><h1 class="title">{{product.name}}</h1></div>
+        <div class="row col-md-8 mb-2 text-start"><span class="variation">{{product.default.variation}}</span></div>
+        <button class="add-to-cart-btn danger" [attr.disabled]="!product.default.purchasable ? true : null">{{(product.default.purchasable) ? "Add to cart" : "Out of stock"}}</button>
+    </div>
+
+    <nav aria-label="" class="mt-4">
+        <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" (click)="onPagePrevious()" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item" [ngClass]="{'active': i === currentPage}" *ngFor="let i of pages" (click)="onPageChange(i)" aria-current="page">
+            <a class="page-link">{{i}}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" (click)="onPageNext()">Next</a>
+        </li>
+        </ul>
+    </nav>
+<div>

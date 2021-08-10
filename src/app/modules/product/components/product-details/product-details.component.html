@@ -1,1 +1,30 @@
-<p>product-details works!</p>
+<div class="row col-md-12" *ngIf="product != null">
+    <div class="alert alert-danger" role="alert" *ngIf="showError">
+        {{errorMessage}}
+    </div>
+    <div class="mb-3">
+        <span>Home</span>
+        <span *ngFor="let cat of product.reversedCategories">{{" > " + cat.name}}</span>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-md-5">
+            <img [src]="product.default.image.src" width="400px" height="400px" class="image-border">
+        </div>
+        <div class="col-md-7">
+            <div class="row col-md-12 fw-bold fs-3">{{product.name}}</div>
+            <div class="row col-md-12 fs-4 mb-2">Rs {{product.default.price}}</div>
+            <div class="row col-md-1 mb-2"><span class="badge rounded-pill bg-success">{{product.default.sale_price}}</span></div>
+            <div class="row col-md-12 fw-lighter mb-2">Available in</div>
+            <div class="row col-md-2 mb-3"><span class="badge bg-dark text-light">{{product.default.variation}}</span></div>
+            <div class="row col-md-4 mb-2"><button class="add-to-cart-btn danger" [attr.disabled]="!product.default.purchasable ? true : null">{{(product.default.purchasable) ? "Add to cart" : "Out of stock"}}</button></div>
+        </div>
+    </div>
+    <!-- <div *ngFor="let product of products" class="col-md-3 card product-item" (click)="goToProductDetails(product)">
+        <img [src]="product.default.image.src">
+        <h1 class="title">{{product.name}}</h1>
+        <p class="price">Rs {{product.default.price}}</p>
+        <p>Description of the product goes here</p>
+        <button [attr.disabled]="!product.default.purchasable ? true : null">{{(product.default.purchasable) ? "Add to cart" : "Out of stock"}}</button>
+    </div> -->
+<div>
